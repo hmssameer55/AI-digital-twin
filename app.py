@@ -2,7 +2,7 @@ import os
 from openai import OpenAI
 from context import TWIN_SYSTEM_PROMPT
 from tools import tools, handle_tool_calls
-from styles import CSS, JS, EXAMPLES
+from styles import CSS, JS, THEME, HEADER, PLACEHOLDER, EXAMPLES
 from dotenv import load_dotenv
 import gradio as gr
 
@@ -18,6 +18,9 @@ system = [{"role": "system", "content": TWIN_SYSTEM_PROMPT}]
 
 
 def chat(message, history):
+    # Gradio's history dicts carry extra keys (metadata, options). OpenAI ignores them,
+    # Groq rejects them with a 400 — so keep only what the API expects.
+    history = [{"role": m["role"], "content": m["content"]} for m in history]
     messages = system + history + [{"role": "user", "content": message}]
     response = openai.chat.completions.create(model=MODEL_NAME, messages=messages, tools=tools)
     while response.choices[0].finish_reason == "tool_calls":
@@ -31,10 +34,18 @@ def chat(message, history):
 
 
 if __name__ == "__main__":
-    gr.ChatInterface(
-        chat,
-        examples=EXAMPLES,
-        title="Digital Twin",
-        description="Talk to my AI twin about my career",
-        chatbot=gr.Chatbot(show_label=False),
-    ).launch(css=CSS, js=JS, theme=gr.themes.Base())
+    with gr.Blocks(title="Sameer Ahmed · AI twin", fill_height=True) as demo:
+        gr.HTML(HEADER)
+        gr.ChatInterface(
+            chat,
+            examples=EXAMPLES,
+            fill_height=True,
+            chatbot=gr.Chatbot(
+                show_label=False,
+                placeholder=PLACEHOLDER,
+                elem_classes="twin-chat",
+                scale=1,
+            ),
+            textbox=gr.Textbox(placeholder="Ask me anything…", submit_btn=True),
+        )
+    demo.launch(css=CSS, js=JS, theme=THEME)
