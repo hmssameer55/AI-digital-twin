@@ -9,7 +9,7 @@ Built in Week 1 of Ed Donner's *AI Engineer Agentic Track* course (based on the
 ## How it works
 
 1. `context.py` builds a system prompt from `summary.txt` + `linkedin.txt`.
-2. `app.py` sends the chat to OpenAI with two tools attached.
+2. `app.py` sends the chat to Groq (`openai/gpt-oss-120b`, via the OpenAI client) with two tools attached.
 3. If the model asks to call a tool, the app runs it, appends the result, and calls
    the model again — a plain `while` loop until it returns a normal answer.
 4. `tools.py` has the two tools: `record_user_details` and `record_unknown_question`,

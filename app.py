@@ -1,3 +1,4 @@
+import os
 from openai import OpenAI
 from context import TWIN_SYSTEM_PROMPT
 from tools import tools, handle_tool_calls
@@ -7,9 +8,11 @@ import gradio as gr
 
 load_dotenv(override=True)
 
-MODEL_NAME = "gpt-5.4-mini"
+# Groq speaks the OpenAI API, so the same client works with a different base_url + key
+GROQ_BASE_URL = "https://api.groq.com/openai/v1"
+MODEL_NAME = "openai/gpt-oss-120b"
 
-openai = OpenAI()
+openai = OpenAI(base_url=GROQ_BASE_URL, api_key=os.getenv("GROQ_API_KEY"))
 
 system = [{"role": "system", "content": TWIN_SYSTEM_PROMPT}]
 
