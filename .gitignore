@@ -1,0 +1,15 @@
+# Secrets
+.env
+
+# Personal profile export (contains phone + email) — keep local
+linkedin.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / tooling
+.DS_Store
+.gradio/

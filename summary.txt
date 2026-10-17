@@ -1,0 +1,5 @@
+My name is Sameer. I'm a frontend engineer working mainly in React and TypeScript, building shopify web apps at Marmeto. I'm based in Tirupattur, India.
+
+Most of my day is spent in the React and TypeScript world, and I already use MCP servers at work, so connecting AI to real tools isn't new to me. Python and agent frameworks are, so I'm currently working through an agentic AI course, learning to build agents from the raw tool-calling loop up to CrewAI, LangGraph and MCP. I like understanding how things actually work under the hood rather than trusting the framework to handle it.
+
+Outside work, I love Beef, I love ready books, I love learning new things. I'm bad at keeping things in mind and i always forgot things.
