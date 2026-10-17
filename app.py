@@ -48,4 +48,13 @@ if __name__ == "__main__":
             ),
             textbox=gr.Textbox(placeholder="Ask me anything…", submit_btn=True),
         )
-    demo.launch(css=CSS, js=JS, theme=THEME)
+    # Render (and most hosts) set PORT and route traffic in from outside, so listen on
+    # all interfaces there. Locally PORT is unset and Gradio keeps 127.0.0.1:7860.
+    port = os.getenv("PORT")
+    demo.launch(
+        css=CSS,
+        js=JS,
+        theme=THEME,
+        server_name="0.0.0.0" if port else None,
+        server_port=int(port) if port else None,
+    )
