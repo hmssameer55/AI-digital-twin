@@ -44,6 +44,10 @@ THEME = gr.themes.Base(
     background_fill_primary_dark="#161922",
     background_fill_secondary="#f1f3f6",
     background_fill_secondary_dark="#1e2230",
+    # Panels (chat area, input card) sit on the primary fill, so bot bubbles
+    # (secondary fill) stand out against them
+    block_background_fill="#ffffff",
+    block_background_fill_dark="#161922",
     block_border_color="#e3e6eb",
     block_border_color_dark="#262b38",
     border_color_primary="#e3e6eb",
@@ -115,15 +119,36 @@ footer, .built-with, .show-api { display: none !important; }
 .dark .twin-badge { color: #c7d2fe; background: #2a2f55; }
 
 /* ---------- Chat ---------- */
-.twin-chat .message { font-size: 15px; line-height: 1.6; }
+.twin-chat .message { font-size: 15px; line-height: 1.6; padding: 10px 14px !important; }
+.twin-chat .message.bot { border: 1px solid var(--border-color-primary); border-radius: 14px 14px 14px 4px !important; }
+.twin-chat .message.user { border-radius: 14px 14px 4px 14px !important; }
 .twin-chat .placeholder { text-align: center; padding: 0 32px; color: var(--body-text-color-subdued); }
+.twin-chat table th, .twin-chat table td { word-break: normal; overflow-wrap: normal; }
 
-/* Send button: use the accent instead of Gradio's grey */
+/* ---------- Input: one card, text field blends in, gap before the button ---------- */
+.input-container { gap: 10px; align-items: center; }
+.input-container textarea {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 8px 4px !important;
+  font-size: 15px;
+}
 .submit-button {
+  flex: none;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
   background: var(--button-primary-background-fill) !important;
   color: #ffffff !important;
 }
 .submit-button:hover { background: var(--button-primary-background-fill-hover) !important; }
+.block:has(> label > .input-container) {
+  border-radius: 14px !important;
+  border: 1px solid var(--border-color-primary) !important;
+  padding: 6px 8px 6px 14px !important;
+}
+.block:has(> label > .input-container):focus-within { border-color: var(--color-accent) !important; }
 
 @media (max-width: 640px) {
   .gradio-container { padding: 16px 12px !important; }
