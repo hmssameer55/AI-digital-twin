@@ -1,12 +1,6 @@
-from pypdf import PdfReader
-
-reader = PdfReader("linkedin.pdf")
-
-linkedin = ""
-for page in reader.pages:
-    text = page.extract_text()
-    if text:
-        linkedin += text
+# linkedin.txt is the LinkedIn PDF export as text, with phone + email removed
+with open("linkedin.txt", "r", encoding="utf-8") as f:
+    linkedin = f.read()
 
 with open("summary.txt", "r", encoding="utf-8") as f:
     summary = f.read()

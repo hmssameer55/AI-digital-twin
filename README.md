@@ -8,7 +8,7 @@ Built in Week 1 of Ed Donner's *AI Engineer Agentic Track* course (based on the
 
 ## How it works
 
-1. `context.py` builds a system prompt from `summary.txt` + `linkedin.pdf`.
+1. `context.py` builds a system prompt from `summary.txt` + `linkedin.txt`.
 2. `app.py` sends the chat to OpenAI with two tools attached.
 3. If the model asks to call a tool, the app runs it, appends the result, and calls
    the model again — a plain `while` loop until it returns a normal answer.
@@ -20,9 +20,10 @@ Built in Week 1 of Ed Donner's *AI Engineer Agentic Track* course (based on the
 
 ```bash
 cp .env.example .env        # fill in your keys
-# add your own linkedin.pdf (LinkedIn → Profile → More → Save to PDF)
 pip install -r requirements.txt
 python app.py
 ```
 
-`linkedin.pdf` is git-ignored because the export contains contact details.
+`linkedin.txt` is my LinkedIn "Save to PDF" export as plain text, with phone and
+email removed so it's safe to publish (the bot could otherwise repeat them).
+The original `linkedin.pdf` is git-ignored.
